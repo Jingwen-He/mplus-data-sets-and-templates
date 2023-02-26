@@ -6,7 +6,7 @@ Data:
 DATA: file is ./productivity-quality-sd-data.dat;
 
 VARIABLE:
-  ! Cee README.md for documentation on variables
+  ! See README.md for documentation on variables
   ! CHANGE AT OWN RISK: you WILL break the DAT file and your analysis
   ! will not be correct (even if MPLUS returns results)
   Names are

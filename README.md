@@ -20,6 +20,8 @@ That would be because:
 
 No. It has no language server, no intellisense, and it has limited error output even for the most basic syntactic errors.
 
+And don't even get me started on it's terrible output formatting. Archaic in not a good way.
+
 ## Can you make it better?
 
 I'm working on a language server, but in the mean time if you're using Visual Studio Code you can do two things:
