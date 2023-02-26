@@ -1,0 +1,136 @@
+Title: Sohana Template
+Data:
+  ! The simplest way to run ANY file in MPLUS is to simple place this INP file
+  ! in the same folder as your data file and use the relative path (the "./")
+  ! to access the file (note the file name has NO spaces to make this work).
+  File is ./sohana_constructs_no_missing.dat;
+
+Variable:
+  ! Cee README.md for documentation on variables
+  ! CHANGE AT OWN RISK: you WILL break the DAT file and your analysis
+  ! will not be correct (even if MPLUS returns results)
+  Names ARE
+    id age gender marital people yrsjob
+    cusinter yrsfirm educ income category qual
+    rel tr pr atn prod out
+    bprd jobsat satw satc burnout burnc
+    burnm lrn rd wu rc wf
+    cr ethc mu lc de uc
+    ub ap jc feed part aut;
+
+  ! The default for this dataset (for some unknown reason)
+  Missing ARE .;
+
+  ! Future research: you can only use one non-numeric flag per MPLUS file
+  ! So you can use the period (.), asterisk (*), blank (), here but per the
+  ! MPLUS documentation, you should likely recode to missing data to 99.
+  ! The reason is FIML is currently a highly recommended approach
+  ! (Enders, C. K., 2010, Applied missing data analysis. New York: Guilford Press)
+  ! Missing ARE all (99).*;
+
+  Usevariables ARE
+    ! Using any combination of varialbles from the "NAMES" above,
+    ! define those here for use in your model
+  ;
+
+Analysis:
+  ! TYPE has different outcomes in the MPLUS output and is complicated
+  !   > general = default
+  !   > basic = descriptive stats, won't output a model diagram
+  !   > complex = standard errors and chi square will be corrected for clustering
+  ! See "TYPE": https://www.statmodel.com/HTML_UG/chapter16V8.htm
+  ! TYPE IS general;
+
+  ! Default estimator is maximum likelihood (ML), parameter estimates with
+  ! conventional standard errors and chi-square test statistic. Other estimators
+  ! are available based on use case.
+  ! See "ESTIMATOR": https://www.statmodel.com/HTML_UG/chapter16V8.htm
+  ! ESTIMATOR IS ML;
+
+  ! Getting "no convergence"? Per MPLUS documentation, try these three lines.
+  !	ITERATIONS = 2500;
+  !	CONVERGENCE = .00001;
+  !	COVERAGE = .000;
+
+  ! Flip on for the Bootstraping
+  ! BOOTSTRAP = 5000;
+
+Model:
+  ! Add your model here!
+  ! Remember, you can also use MPLUS Diagrammer to draw your model and then
+  ! paste code here to do other work (e.g., co-vary, mediations, et cetera)
+
+  ! Statement Structure: most MPLUS model commands take this basic form:
+  !   Form: variable(s) METHOD variable(s)
+  !   Example: jobsat ON rc burnm
+  ! Common methods you likely will use:
+  !   > ON:    defines regression relationships
+  !   > WITH:  defines correlational relationships
+  !   > BY:    to name and define the continuous latent variables in the model
+  !   > PON:   defines paired regression relationships
+  !   > PWITH: defines paired correlational relationships
+  !
+  ! You will also need value modifiers that have a common approach form of:
+  !   Form: variableMODIFIER
+  !   Example: rc*
+  ! Common modifiers you likely will use:
+  !   > *: frees a param at a default value or a specific starting value, e.g. f1*
+  !   > @: fixes a param at a default value or a specific value, e.g. f1@0
+  !   > (number): constrains params to be equal, e.g. f1 ON x1 (1);
+  !
+  ! Additional docs: https://www.statmodel.com/HTML_UG/chapter17V8.htm
+
+  ! **********************************
+  ! ** replace me - your model here **
+  ! **********************************
+
+  ! Let's say you want to build effects into your model. You'll need some added
+  ! commands to your model.
+  !
+  ! MODEL INDIRECT command is used to request indirect and direct effects and
+  ! their standard errors and takes the form of:
+  !   Form: MODEL INDIRECT: variable(s) METHOD variable(s);
+  !   Example: MODEL INDIRECT: jobsat IND rc;
+  !
+  ! Common methods you likely will use:
+  ! > IND: variable on the left-hand side of IND is the dependent variable; the
+  !        last variable on the right-hand side of IND is the independent
+  !        variable. Variables on the right-hand side of IND are mediating
+  !        variables.
+  !        Example: MODEL INDIRECT: jobsat IND rc;
+  ! > VIA: variable on the left-hand side of IND is the dependent variable; the
+  !        last variable on the right-hand side of IND is the independent
+  !        variable. Variables on the right-hand side of IND are mediating
+  !        variables.
+  !        Example: MODEL INDIRECT: jobsat VIA rc;
+  !
+  ! What's the difference?
+  !  > IND: "If there are no mediating variables included in the IND option, all
+  !          indirect effects between the independent variable and dependent
+  !          variable are computed."
+  !  > VIA: "All indirect effects that go from the independent variable to the
+  !          dependent variable and include the mediating variables are computed."
+  !
+  ! Additional docs: https://www.statmodel.com/HTML_UG/chapter17V8.htm
+
+Output:
+  ! There are lots of options, but the most common are below.
+  ! Additional docs: https://www.statmodel.com/HTML_UG/chapter18V8.htm
+
+  ! modification indices, expected parameter change indices, and two types of
+  ! standardized expected parameter change indices for all parameters in the
+  ! model that are fixed or constrained to be equal to other parameters
+  MODINDICES
+
+  ! Enable for Bootstrap. Requires:
+  ! > Remove/comment out MODINDICES in OUTPUT
+  ! > Enable/remove comment for BOOTSTRAP in ANALYSIS
+	! CINTERVAL(BOOTSTRAP)
+
+  ! only the standardization that uses the variances of the continuous latent
+  ! variables as well as the variances of the background and outcome variables
+  ! STDYX
+
+  ! standardized parameter estimates and their standard errors and R-square
+  STANDARDIZED(ALL)
+;
