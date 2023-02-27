@@ -2,7 +2,54 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run Mplus",
+      "label": "Mplus Iterator: Text Output + Diagram",
+      "type": "shell",
+      "command": "${workspaceFolder}/tools/bash/mplus-iterator.sh",
+      "args": ["-i", "${fileBasenameNoExtension}"],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Mplus Iterator: HTML Output + Diagram",
+      "type": "shell",
+      "command": "${workspaceFolder}/tools/bash/mplus-iterator.sh",
+      "args": ["-i", "${fileBasenameNoExtension}", "-t", "html"],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Run Mplus - HTML output w/Diagram",
+      "type": "process",
+      "command": "mplus.exe",
+      "args": ["${fileBasename}", "/html", "/diagram"],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Run Mplus - Text Output w/Diagram",
       "type": "process",
       "command": "mplus.exe",
       "args": ["${fileBasename}", "/diagram"],
@@ -23,8 +70,8 @@
         "cwd": "${fileDirname}"
       },
       "group": {
-        "kind": "build",
-        "isDefault": true
+        "kind": "none",
+        "isDefault": false
       }
     }
   ]
