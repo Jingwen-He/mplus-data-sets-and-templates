@@ -12,6 +12,30 @@ The key variables measured include:
 6. individual characteristics (learning, demographics)
 7. social reliability (for testing common method bias)
 
+## Data Column Layout
+
+The data within the mplus file is specifically laid out in this order. Changing this order will break your analysis.
+
+```
+VARIABLE:
+  ! See README.md for documentation on variables
+  ! CHANGE AT OWN RISK: you WILL break the DAT file and your analysis
+  ! will not be correct (even if MPLUS returns results)
+  Names are
+    id age gender
+    q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12
+    q13 q14 q15 q16 q17 p1 p2 p3 p4 p5 p6 p7
+    sw1 sw2 sw3 sc1 sc2 sc3 bc1 bc2 bc3 bc4 bc5 bc6
+    bm1 bm2 bm3 bm4 bm5 bm6 l1 l2 l3 rd1 rd2 rd3 rd4
+    ra1 ra2 rc1 rc2 rc3 wf1 wf2 cr1 cr2 cr3 cr4
+    ec1 ec2 ec3 ec4 ec5 mu1 mu2 lc1 lc2 lc3 lc4
+    de1 de2 uc1 uc2 uc3 ub1 ub2 ub3 ub4 ap1 ap2 ap3
+    f1 f2 f3 f4 pp1 pp2 pp3 pp4 a1 a2 a3
+    marital people yrsjob cusinter yrsfirm educ income category
+    SDRS1 SDRS2 SDRS3 SDRS4 SDRS5;
+  ;
+```
+
 ## Construct and Variable Documentation
 
 The following variables are avaliable within the `productivity-quality-sd-data.dat`

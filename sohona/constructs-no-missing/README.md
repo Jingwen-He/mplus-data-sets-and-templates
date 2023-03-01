@@ -1,5 +1,24 @@
 # Sohana No Missing Data
 
+## Data Column Layout
+
+The data within the mplus file is specifically laid out in this order. Changing this order will break your analysis.
+
+```
+Variable:
+  ! See README.md for documentation on variables
+  ! CHANGE AT OWN RISK: you WILL break the DAT file and your analysis
+  ! will not be correct (even if MPLUS returns results)
+  Names ARE
+    id age gender marital people yrsjob
+    cusinter yrsfirm educ income category qual
+    rel tr pr atn prod out
+    bprd jobsat satw satc burnout burnc
+    burnm lrn rd wu rc wf
+    cr ethc mu lc de uc
+    ub ap jc feed part aut;
+```
+
 ## Construct and Variable Documentation
 
 The following variables are avaliable within the `sohana_constructs_no_missing.dat`
