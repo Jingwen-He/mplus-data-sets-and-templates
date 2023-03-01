@@ -14,7 +14,7 @@
         "isDefault": true
       },
       "presentation": {
-        "reveal": "always",
+        "reveal": "silent",
         "panel": "dedicated"
       }
     },
@@ -31,7 +31,29 @@
         "isDefault": false
       },
       "presentation": {
-        "reveal": "always",
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Mplus R: Generate Fit Table for Outputs",
+      "type": "shell",
+      "command": "${workspaceFolder}/tools/bash/r-generate-fit-tables.sh",
+      "args": [
+        "-i",
+        "${relativeFileDirname}/output",
+        "-w",
+        "${workspaceFolder}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "silent",
         "panel": "dedicated"
       }
     },

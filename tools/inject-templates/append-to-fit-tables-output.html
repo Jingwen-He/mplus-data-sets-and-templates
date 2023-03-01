@@ -1,0 +1,130 @@
+<!--
+  This file is appended to the output of r-generate-fit-tables.sh
+  to create check colors and style because yikes, these tools are terrible
+  at HTML
+-->
+<style>
+  table {
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    font-family: sans-serif;
+    min-width: 200px;
+  }
+
+  tr th {
+    background-color: #d3d3d3;
+    color: #000;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  td {
+    background-color: #fff;
+    padding: 1rem;
+  }
+
+  table tr:hover td {
+    background: #10739b28;
+  }
+
+  .test-fail {
+    background: rgba(255, 0, 0, 0.267);
+  }
+  .test-pass {
+    background: rgba(0, 255, 13, 0.267);
+  }
+</style>
+<script type="module">
+  // change the column name for PCLOSE
+  document.querySelector(
+    "body > table > tbody > tr:nth-child(1) > th:nth-child(11)"
+  ).textContent = "PCLOSE";
+
+  function addFailedClass(ele) {
+    ele.classList.add("test-fail");
+  }
+  function addPassedClass(ele) {
+    ele.classList.add("test-pass");
+  }
+
+  const rows = document.querySelectorAll("table > tbody > tr");
+
+  for (let row of rows) {
+    let columns = row.querySelectorAll("td");
+
+    if (columns.length !== 0) {
+      for (let [index, column] of columns.entries()) {
+        console.log(index, column.textContent);
+
+        // This is all based on the common thresholds within my
+        // DBA 2024: Our (Internal) Quant Survival Notes
+        // TODO: put the Zotero refs in here for easy access
+        switch (index) {
+          case 1:
+          case 2:
+          case 3:
+            break;
+          // CLI
+          case 4:
+            if (parseFloat(column.textContent) < 0.95) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // TLI
+          case 5:
+            if (parseFloat(column.textContent) < 0.95) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // SRMR
+          case 6:
+            if (parseFloat(column.textContent) > 0.07) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // RMSEA
+          case 7:
+            if (parseFloat(column.textContent) > 0.1) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // RMSEA Lower Bound
+          case 8:
+            if (parseFloat(column.textContent) > 0.1) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // RMSEA Upper Bound
+          case 9:
+            if (parseFloat(column.textContent) > 0.1) {
+              addFailedClass(column);
+            } else {
+              addPassedClass(column);
+            }
+            break;
+          // PCLOSE
+          case 10:
+            if (parseFloat(column.textContent) >= 0.05) {
+              addPassedClass(column);
+            } else {
+              addFailedClass(column);
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+</script>
