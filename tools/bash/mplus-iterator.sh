@@ -25,11 +25,11 @@ done
 if [ -n "$inp_file" ]; then
   # run mplus
   # TODO pull mplus.exe out into a per-platform check
-  mplus.exe $inp_file.inp output/$inp_file-$timestamp.out /diagram
+  mplus $inp_file.inp output/$inp_file-$timestamp.out /diagram
 
   # do we want HTML?
   if [ -n "$out_html" ]; then
-    mplus.exe $inp_file.inp /html
+    mplus $inp_file.inp /html
     mv $inp_file.htm output/$inp_file-$timestamp.html
 
     # open in Chrome (this is pretty WSL2 hacky)
