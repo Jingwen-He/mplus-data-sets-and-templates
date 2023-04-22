@@ -60,7 +60,7 @@
     {
       "label": "Run Mplus - HTML output w/Diagram",
       "type": "process",
-      "command": "mplus.exe",
+      "command": "mplus",
       "args": ["${fileBasename}", "/html", "/diagram"],
       "options": {
         "cwd": "${fileDirname}"
@@ -73,7 +73,7 @@
     {
       "label": "Run Mplus - Text Output w/Diagram",
       "type": "process",
-      "command": "mplus.exe",
+      "command": "mplus",
       "args": ["${fileBasename}", "/diagram"],
       "options": {
         "cwd": "${fileDirname}"
@@ -86,7 +86,7 @@
     {
       "label": "Open Mplus Diagrammer",
       "type": "process",
-      "command": "Diagrammer.exe",
+      "command": "Diagrammer",
       "args": ["${fileBasename}"],
       "options": {
         "cwd": "${fileDirname}"
